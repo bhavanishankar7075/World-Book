@@ -1,6 +1,8 @@
 import "./globals.css";
 import Providers from "./providers";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 
 export const metadata = {
   title: "WorldBook – Discover Millions of Books Online",
@@ -19,6 +21,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+          <Footer/>
         </Providers>
       </body>
     </html>
