@@ -7,4 +7,4 @@ import { HistoryController } from "./history.controller";
   imports: [MongooseModule.forFeature([{ name: ViewHistory.name, schema: ViewHistorySchema }])],
   controllers: [HistoryController],
 })
-export class HistoryModule {}
+export class HistoryModule { }

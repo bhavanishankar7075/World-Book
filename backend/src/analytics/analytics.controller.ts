@@ -10,8 +10,8 @@ export class AnalyticsController {
   constructor(
     @InjectModel(Product.name) private productModel: Model<Product>,
     @InjectModel(Category.name) private categoryModel: Model<Category>,
-@InjectModel(ScrapeJob.name) private jobModel: Model<ScrapeJobDocument>,
-  ) {}
+    @InjectModel(ScrapeJob.name) private jobModel: Model<ScrapeJobDocument>,
+  ) { }
 
   @Get()
   async getStats() {

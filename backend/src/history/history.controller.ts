@@ -5,7 +5,7 @@ import { ViewHistory } from "./history.schema";
 
 @Controller("history")
 export class HistoryController {
-  constructor(@InjectModel(ViewHistory.name) private model: Model<ViewHistory>) {}
+  constructor(@InjectModel(ViewHistory.name) private model: Model<ViewHistory>) { }
 
   @Post()
   async save(@Body() body: { path: string }) {

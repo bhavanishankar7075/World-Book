@@ -11,4 +11,4 @@ import { NavigationController } from "./navigation.controller";
   providers: [NavigationService],
   controllers: [NavigationController],
 })
-export class NavigationModule {}
+export class NavigationModule { }

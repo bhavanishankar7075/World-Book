@@ -28,7 +28,7 @@ export class ScrapeService {
     @InjectModel(ProductDetail.name) private productDetailModel: Model<ProductDetail>,
     @InjectModel(ScrapeJob.name) private jobModel: Model<ScrapeJob>,
     @InjectModel(Review.name) private reviewModel: Model<Review>,
-  ) {}
+  ) { }
 
   private async delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -184,40 +184,40 @@ export class ScrapeService {
 
 
   async runFullScrapePipeline() {
-  console.log("🔥 FULL SCRAPE PIPELINE STARTED");
+    console.log("FULL SCRAPE PIPELINE STARTED");
 
-  const navCount = await this.navModel.countDocuments();
-  if (navCount === 0) {
-    console.log("📌 Scraping navigation...");
-    await this.scrapeNavigation();
-  }
-
-  const navs = await this.navModel.find();
-
-  for (const nav of navs) {
-    const exists = await this.categoryModel.exists({ navigation_id: nav._id });
-    if (!exists) {
-      console.log(`📌 Scraping categories for ${nav.slug}`);
-      await this.scrapeCategory(nav.slug, nav._id);
-      await this.delay(4000);
+    const navCount = await this.navModel.countDocuments();
+    if (navCount === 0) {
+      console.log("Scraping navigation...");
+      await this.scrapeNavigation();
     }
+
+    const navs = await this.navModel.find();
+
+    for (const nav of navs) {
+      const exists = await this.categoryModel.exists({ navigation_id: nav._id });
+      if (!exists) {
+        console.log(`Scraping categories for ${nav.slug}`);
+        await this.scrapeCategory(nav.slug, nav._id);
+        await this.delay(4000);
+      }
+    }
+
+    const categories = await this.categoryModel.find();
+
+    for (const cat of categories) {
+      if (cat.product_count > 0) continue;
+
+      console.log(`Scraping products for ${cat.slug}`);
+      const products = await this.scrapeProducts(cat.slug, cat._id);
+      await this.categoryModel.updateOne(
+        { _id: cat._id },
+        { product_count: products.length }
+      );
+      await this.delay(5000);
+    }
+
+    return { success: true };
   }
-
-  const categories = await this.categoryModel.find();
-
-  for (const cat of categories) {
-    if (cat.product_count > 0) continue;
-
-    console.log(`📌 Scraping products for ${cat.slug}`);
-    const products = await this.scrapeProducts(cat.slug, cat._id);
-    await this.categoryModel.updateOne(
-      { _id: cat._id },
-      { product_count: products.length }
-    );
-    await this.delay(5000);
-  }
-
-  return { success: true };
-}
 
 }

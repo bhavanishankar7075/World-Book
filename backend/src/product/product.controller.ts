@@ -3,7 +3,7 @@ import { ProductService } from "./product.service";
 
 @Controller("products")
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService) { }
 
   @Get("search")
   async search(
@@ -24,8 +24,4 @@ export class ProductController {
 
     return product;
   }
-
-
-
-  
 }

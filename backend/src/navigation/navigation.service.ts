@@ -5,7 +5,7 @@ import { Navigation } from "./navigation.schema";
 
 @Injectable()
 export class NavigationService {
-  constructor(@InjectModel(Navigation.name) private model: Model<Navigation>) {}
+  constructor(@InjectModel(Navigation.name) private model: Model<Navigation>) { }
 
   async findAll() {
     return this.model.find();

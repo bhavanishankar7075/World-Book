@@ -3,7 +3,7 @@ import { NavigationService } from "./navigation.service";
 
 @Controller("navigation")
 export class NavigationController {
-  constructor(private service: NavigationService) {}
+  constructor(private service: NavigationService) { }
 
   @Get()
   async getAll() {

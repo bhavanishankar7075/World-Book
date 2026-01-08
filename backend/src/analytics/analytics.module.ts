@@ -15,4 +15,4 @@ import { ScrapeJob, ScrapeJobSchema } from "../scrape/scrape-job.schema";
   ],
   controllers: [AnalyticsController],
 })
-export class AnalyticsModule {}
+export class AnalyticsModule { }

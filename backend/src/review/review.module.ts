@@ -8,4 +8,4 @@ import { Review, ReviewSchema } from "./review.schema";
   ],
   exports: [MongooseModule],
 })
-export class ReviewModule {}
+export class ReviewModule { }
