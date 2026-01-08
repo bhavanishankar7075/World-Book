@@ -9,12 +9,14 @@ export class ProductDetail extends Document {
   @Prop()
   description: string;
 
-  @Prop({ type: Object })
-  specs: {
-    publisher?: string;
-    isbn?: string;
-    publish_date?: string;
-  };
+ @Prop({ type: Object })
+specs: {
+  publisher?: string;
+  isbn?: string;
+  publish_date?: string;
+  author?: string;
+};
+
 
   @Prop()
   ratings_avg: number;

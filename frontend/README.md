@@ -1,22 +1,24 @@
 
+
 ---
 
-# 📚 World Books – Frontend (Next.js)
+# 📚 World Books – Product Data Explorer (Frontend)
 
-A modern responsive frontend for the **World Books – Product Data Explorer** project.
-This application allows users to browse book categories, view products, and explore individual book details with real-time scraped data.
+A modern full-stack book discovery platform that scrapes real-world product data from **WorldOfBooks**, enriches it with metadata, and presents it through a powerful searchable interface.
+
+This frontend is built with **Next.js App Router**, optimized for SEO, performance, and professional UX.
 
 ---
 
 ## 🚀 Tech Stack
 
-| Technology              | Usage                       |
-| ----------------------- | --------------------------- |
-| Next.js 14 (App Router) | Frontend Framework          |
-| TypeScript              | Type safety                 |
-| Tailwind CSS            | UI Styling                  |
-| React Query (TanStack)  | API data fetching & caching |
-| Axios                   | HTTP Client                 |
+| Technology              | Usage                |
+| ----------------------- | -------------------- |
+| Next.js 14 (App Router) | Frontend Framework   |
+| TypeScript              | Type safety          |
+| Tailwind CSS            | UI Styling           |
+| Axios                   | API Communication    |
+| Skeleton UI             | Loading placeholders |
 
 ---
 
@@ -26,26 +28,28 @@ This application allows users to browse book categories, view products, and expl
 frontend/
  ├── src/
  │   ├── app/
- │   │   ├── page.tsx                # Homepage – Navigation List
- │   │   ├── category/[...slug]/
- │   │   │   └── page.tsx            # Category Products Page
- │   │   ├── product/[slug]/
- │   │   │   └── page.tsx            # Product Details Page
- │   │   ├── about/page.tsx
- │   │   ├── contact/page.tsx
+ │   │   ├── page.tsx
+ │   │   ├── search/
+ │   │   │   ├── page.tsx
+ │   │   │   └── layout.tsx
+ │   │   ├── category/[...slug]/page.tsx
+ │   │   ├── product/[slug]/page.tsx
  │   │   └── layout.tsx
  │   ├── components/
- │   │   └── Navbar.tsx
- │   ├── lib/queryClient.ts
+ │   │   ├── Navbar.tsx
+ │   │   ├── SkeletonGrid.tsx
+ │   │   └── ProductCard.tsx
+ │   ├── lib/
+ │   │   └── api.ts
  │   └── globals.css
  └── README.md
 ```
 
 ---
 
-## ⚙️ Environment Variables
+## ⚙️ Environment Setup
 
-Create `.env.local` file in frontend root:
+Create `.env.local`:
 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
@@ -53,14 +57,14 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 
 ---
 
-## ▶️ Run Frontend
+## ▶ Run Frontend
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open browser:
+Open:
 
 ```
 http://localhost:3000
@@ -68,52 +72,45 @@ http://localhost:3000
 
 ---
 
-## 🔄 Application Flow
+## 🔎 Application Routes
 
-| Page     | Route                                                    | Description                                         |
-| -------- | -------------------------------------------------------- | --------------------------------------------------- |
-| Home     | `/`                                                      | Displays navigation categories scraped from backend |
-| Category | `/category/collections/fiction-books`                    | Displays books inside selected category             |
-| Product  | `/product/yellowface-book-rebecca-f-kuang-9780008532819` | Shows product details & description                 |
-| About    | `/about`                                                 | Project info                                        |
-| Contact  | `/contact`                                               | Contact form                                        |
-
----
-
-## ⏳ Skeleton Loading
-
-All product and category pages display **real skeleton loaders** instead of plain loading text for professional UX.
+| Feature       | Route                           | Description                          |
+| ------------- | ------------------------------- | ------------------------------------ |
+| Home          | `/`                             | Navigation categories                |
+| Category View | `/category/collections/...slug` | Books inside selected category       |
+| Product Page  | `/product/:slug`                | Full book detail page                |
+| Search Page   | `/search?q=yellowface`          | Search books with filters & sorting  |
+| Admin Stats   | `/analytics` (API)              | Analytics dashboard backend endpoint |
 
 ---
 
-## 📦 API Integration
+## ✨ Key Features
 
-All frontend data is fetched from backend:
-
-| API               | Purpose           |
-| ----------------- | ----------------- |
-| `/navigation`     | Navigation list   |
-| `/category/:slug` | Category products |
-| `/products/:slug` | Product details   |
-
----
-
-## 📱 Responsive Design
-
-* Mobile: 2 column layout
-* Tablet/Desktop: 4 column layout
-* Fully responsive navbar
+* Real-time book scraping
+* SEO-friendly metadata generation
+* Smart search with sorting
+* Skeleton loading UI
+* Fully responsive layout
+* MongoDB powered product system
 
 ---
 
-## 🧠 Features
+## 🧪 Example Search
 
-* Dynamic routing using slugs
-* Category navigation with nested slugs
-* Product details with scraped description
-* Skeleton loaders for smooth UX
-* Fully responsive UI
+```
+http://localhost:3000/search?q=yellowface
+```
 
 ---
 
+## 🧠 Project Purpose
+
+This project demonstrates real-world skills in:
+
+* Web scraping automation
+* Data persistence & normalization
+* SEO metadata handling
+* Frontend-backend system design
+
+---
 

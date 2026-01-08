@@ -85,6 +85,22 @@ export default function ProductPage() {
         <h2 className="font-semibold text-lg">Description</h2>
         <p className="mt-2 text-gray-700">{product.description}</p>
       </section>
+      <section className="mt-8">
+        <h2 className="font-semibold text-lg mb-3">Customer Reviews</h2>
+
+        {product.reviews.length === 0 && (
+          <p className="text-gray-500 text-sm">No reviews available.</p>
+        )}
+
+        {product.reviews.map((r, i) => (
+          <div key={i} className="border-b py-3 text-sm">
+            <p className="font-semibold">{r.author}</p>
+            <p className="text-yellow-600">⭐ {r.rating} / 5</p>
+            <p className="text-gray-700 mt-1">{r.text}</p>
+          </div>
+        ))}
+      </section>
+
 
       {product.related && product.related.length > 0 && (
         <section className="mt-10">

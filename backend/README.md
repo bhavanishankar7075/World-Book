@@ -1,80 +1,84 @@
 
 ---
 
-## 1️⃣ Swagger / API Documentation
+# 🌍 World Books – Product Data Explorer (Backend)
 
-### Install
+A production-ready NestJS backend that scrapes live book data from **worldofbooks.com**, enriches product metadata, and exposes REST APIs for the frontend.
+
+---
+
+## 🚀 Tech Stack
+
+| Technology | Purpose                |
+| ---------- | ---------------------- |
+| NestJS     | Backend Framework      |
+| MongoDB    | Primary Database       |
+| Mongoose   | ODM Layer              |
+| Playwright | Web Scraping Engine    |
+| Redis      | Job Queue / Cache      |
+| Swagger    | API Documentation      |
+| Docker     | Containerization       |
+| GitHub CI  | Continuous Integration |
+
+---
+
+## ⚙️ Setup Instructions
 
 ```bash
-npm install @nestjs/swagger swagger-ui-express
+npm install
+npm run start:dev
 ```
 
-### Update `main.ts`
+Backend runs at:
 
-```ts
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { ValidationPipe } from "@nestjs/common";
-import { ThrottlerGuard } from "@nestjs/throttler";
-import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
-  app.enableCors();
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  app.useGlobalGuards(new ThrottlerGuard());
-
-  const config = new DocumentBuilder()
-    .setTitle("World Books API")
-    .setDescription("Product Data Explorer – REST API")
-    .setVersion("1.0")
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("api/docs", app, document);
-
-  await app.listen(process.env.PORT || 3001);
-}
-bootstrap();
+```
+http://localhost:3001
 ```
 
-Visit:
+---
+
+## 🔐 Environment Variables
+
+Create `.env` in backend root:
+
+```env
+PORT=3001
+MONGO_URI=mongodb://127.0.0.1:27017/product-explorer
+REDIS_HOST=localhost
+REDIS_PORT=6379
+```
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint                | Description                    |
+| ------ | ----------------------- | ------------------------------ |
+| GET    | /navigation             | Navigation headings            |
+| GET    | /category/:slug         | Category products              |
+| GET    | /products/:slug         | Product detail page            |
+| GET    | /products/search        | Search with sorting & filters  |
+| GET    | /analytics              | System analytics dashboard     |
+| POST   | /scrape/full            | Trigger full scraping pipeline |
+| POST   | /scrape/missing-details | Scrape missing product details |
+
+---
+
+## 📄 Swagger Documentation
+
+After starting backend, open:
 
 ```
 http://localhost:3001/api/docs
 ```
 
----
-
-## 2️⃣ GitHub Actions – CI Pipeline
-
-Create: `.github/workflows/ci.yml`
-
-```yaml
-name: Backend CI
-
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm run lint
-      - run: npm run build
-```
+You will see fully interactive API documentation.
 
 ---
 
-## 3️⃣ Docker Setup
+## 🐳 Docker Setup
 
-### `Dockerfile`
+### Dockerfile
 
 ```dockerfile
 FROM node:20-alpine
@@ -88,7 +92,9 @@ RUN npm run build
 CMD ["node", "dist/main.js"]
 ```
 
-### `docker-compose.yml`
+---
+
+### docker-compose.yml
 
 ```yaml
 version: "3"
@@ -117,81 +123,31 @@ docker-compose up --build
 
 ---
 
-## 4️⃣ Final Backend README.md (replace yours)
+## 🔄 CI Pipeline (GitHub Actions)
 
-````md
-# 🌍 World Books – Product Data Explorer (Backend)
-
-Production-ready NestJS backend that scrapes live book data from **worldofbooks.com**, persists it, and exposes REST APIs.
-
----
-
-## 🚀 Tech Stack
-- NestJS
-- MongoDB + Mongoose
-- Playwright
-- Redis
-- Swagger
-- Docker
-- GitHub Actions CI
-
----
-
-## ⚙️ Setup
-
-```bash
-npm install
-npm run start:dev
-````
-
----
-
-## 🔐 Environment
-
-```env
-PORT=3001
-MONGO_URI=mongodb://127.0.0.1:27017/product-explorer
-REDIS_HOST=localhost
-REDIS_PORT=6379
-```
-
----
-
-## 📡 APIs
-
-| Method | Endpoint               | Description                   |
-| ------ | ---------------------- | ----------------------------- |
-| GET    | /navigation            | Navigation headings           |
-| GET    | /category/:slug        | Category products             |
-| GET    | /products/:slug        | Product detail                |
-| POST   | /scrape/navigation     | Trigger navigation scrape     |
-| POST   | /scrape/category       | Trigger category scrape       |
-| POST   | /scrape/products       | Trigger product scrape        |
-| POST   | /scrape/product-detail | Trigger product detail scrape |
-
----
-
-## 📄 Swagger Docs
+Create file:
 
 ```
-http://localhost:3001/api/docs
+.github/workflows/ci.yml
 ```
 
----
+```yaml
+name: Backend CI
 
-## 🐳 Docker
+on: [push]
 
-```bash
-docker-compose up --build
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
 ```
-
----
-
-## 🧪 CI
-
-GitHub Actions pipeline auto-builds backend on every push.
-
----
-
 
 

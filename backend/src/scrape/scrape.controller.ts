@@ -7,14 +7,20 @@ export class ScrapeController {
 
   @Post("full")
   startFullScrape() {
-    // 🔥 Run pipeline in background – do NOT await
     this.service.runFullScrapePipeline()
-      .then(() => console.log("🎉 Scrape job finished"))
-      .catch(err => console.error("❌ Scrape job failed", err));
+      .then(() => console.log("🎉 Full scrape finished"))
+      .catch(err => console.error("❌ Full scrape failed", err));
 
-    return {
-      success: true,
-      message: "Scraping started in background. Check backend logs."
-    };
+    return { success: true, message: "Full scrape started" };
+  }
+
+  @Post("missing-details")
+  scrapeMissingDetails() {
+    return this.service.scrapeMissingProductDetails();
+  }
+
+  @Post("recalc-counts")
+  recalcCounts() {
+    return this.service.recalcCategoryCounts();
   }
 }

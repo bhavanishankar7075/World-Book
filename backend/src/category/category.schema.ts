@@ -3,7 +3,8 @@ import { Document, Types } from "mongoose";
 
 @Schema({ timestamps: true })
 export class Category extends Document {
-  @Prop({ type: Types.ObjectId, ref: "Navigation", required: true })
+
+  @Prop({ type: Types.ObjectId, ref: "Navigation", required: true, index: true })
   navigation_id: Types.ObjectId;
 
   @Prop({ type: Types.ObjectId, ref: "Category", default: null })
@@ -12,7 +13,7 @@ export class Category extends Document {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, unique: true, index: true })
   slug: string;
 
   @Prop({ default: 0 })

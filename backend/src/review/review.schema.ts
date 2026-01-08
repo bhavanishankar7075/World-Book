@@ -14,6 +14,10 @@ export class Review extends Document {
 
   @Prop()
   text: string;
+
+  @Prop()
+  created_at: Date;
 }
+
 
 export const ReviewSchema = SchemaFactory.createForClass(Review);

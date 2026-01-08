@@ -9,6 +9,8 @@ import { ScrapeModule } from "./scrape/scrape.module";
 import { CategoryModule } from "./category/category.module";
 import { ProductModule } from "./product/product.module";
 import { HistoryModule } from "./history/history.module";
+import { AnalyticsModule } from "./analytics/analytics.module";
+
 
 @Module({
   imports: [
@@ -30,6 +32,7 @@ import { HistoryModule } from "./history/history.module";
     CategoryModule,
     ProductModule,
     HistoryModule,
+    AnalyticsModule,
   ],
 })
 export class AppModule {}
