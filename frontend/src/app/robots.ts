@@ -3,6 +3,6 @@ export default function robots() {
     rules: [
       { userAgent: "*", allow: "/" },
     ],
-    sitemap: "https://your-domain.com/sitemap.xml",
+    sitemap: "https://world-book-backend.onrender.com/sitemap.xml",
   };
 }
