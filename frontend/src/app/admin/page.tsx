@@ -10,7 +10,7 @@ export default function AdminDashboard() {
     const apiUrl = typeof window !== 'undefined'
       ? window.location.origin.includes('localhost')
         ? 'http://localhost:3001'
-        : 'https://your-backend-url.com'
+        : 'https://world-book-backend.onrender.com'
       : '';
 
     fetch(`${apiUrl}/analytics`)

@@ -58,7 +58,7 @@ export default function CategoryClient({ slug }: { slug: string }) {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || (
       typeof window !== 'undefined' && window.location.origin.includes('localhost')
         ? 'http://localhost:3001'
-        : 'https://your-backend-url.com'
+        : 'https://world-book-backend.onrender.com'
     );
 
     // Dynamic URL matching the fixed Backend Controller
