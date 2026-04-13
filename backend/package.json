@@ -29,7 +29,7 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.2.4",
     "@nestjs/throttler": "^6.5.0",
-    "axios": "^1.13.2",
+    "axios": "^1.15.0",
     "bullmq": "^5.66.4",
     "cache-manager": "^7.2.7",
     "class-transformer": "^0.5.1",
